@@ -95,7 +95,6 @@ accuracies = cross_val_score(estimator = classifier, X = X_train, y = y_train, c
 mean = accuracies.mean()
 variance = accuracies.std()
 
-
 def build_classifier_2(op):
     classifier = Sequential()
     classifier.add(Dense(units = 6, kernel_initializer = 'uniform', activation = 'relu', input_dim = 11))
@@ -104,9 +103,9 @@ def build_classifier_2(op):
     classifier.compile(optimizer = op, loss = 'binary_crossentropy', metrics = ['accuracy'])
     return classifier 
 classifier = KerasClassifier(build_fn = build_classifier_2)
-parameters = {'batch_size':[10,25],
-              'epochs': [500, 800], 
-              'op':['adam', 'rmsprop']}
+parameters = {'batch_size':[1,10],
+              'epochs': [800, 1440], 
+              'op':['adam']}#, 'rmsprop']}
 grid_search = GridSearchCV(estimator = classifier,
                            param_grid = parameters,
                            scoring = 'accuracy',
@@ -114,16 +113,6 @@ grid_search = GridSearchCV(estimator = classifier,
 
 best_parameters = grid_search.best_params_
 best_accuracy = grid_search.best_score_
-
-
-
-
-
-
-
-
-
-
 
 #Solution = (classifier.predict(sc.transform(np.array([[0,0,600,1, 40,3, 60000,2, 1, 1, 50000]])))>0.5)
 
