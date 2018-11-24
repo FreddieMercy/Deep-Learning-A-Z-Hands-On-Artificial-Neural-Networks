@@ -1,7 +1,5 @@
 # Recurrent Neural Network
 
-
-
 # Part 1 - Data Preprocessing
 
 # Importing the libraries
@@ -13,22 +11,21 @@ import pandas as pd
 dataset_train = pd.read_csv('Google_Stock_Price_Train.csv')
 training_set = dataset_train.iloc[:, 1:2].values
 
-# Feature Scaling
 from sklearn.preprocessing import MinMaxScaler
-sc = MinMaxScaler(feature_range = (0, 1))
+
+sc = MinMaxScaler(feature_range = (0,1))
 training_set_scaled = sc.fit_transform(training_set)
 
-# Creating a data structure with 60 timesteps and 1 output
 X_train = []
 y_train = []
+
 for i in range(60, 1258):
     X_train.append(training_set_scaled[i-60:i, 0])
     y_train.append(training_set_scaled[i, 0])
+
 X_train, y_train = np.array(X_train), np.array(y_train)
 
-# Reshaping
-X_train = np.reshape(X_train, (X_train.shape[0], X_train.shape[1], 1))
-
+X_train = np.reshape(X_train, (X_train.shape[0],X_train.shape[1],1))
 
 
 # Part 2 - Building the RNN
@@ -42,38 +39,27 @@ from keras.layers import Dropout
 # Initialising the RNN
 regressor = Sequential()
 
-# Adding the first LSTM layer and some Dropout regularisation
 regressor.add(LSTM(units = 50, return_sequences = True, input_shape = (X_train.shape[1], 1)))
 regressor.add(Dropout(0.2))
 
-# Adding a second LSTM layer and some Dropout regularisation
 regressor.add(LSTM(units = 50, return_sequences = True))
 regressor.add(Dropout(0.2))
 
-# Adding a third LSTM layer and some Dropout regularisation
 regressor.add(LSTM(units = 50, return_sequences = True))
 regressor.add(Dropout(0.2))
 
-# Adding a fourth LSTM layer and some Dropout regularisation
 regressor.add(LSTM(units = 50))
 regressor.add(Dropout(0.2))
 
-# Adding the output layer
-regressor.add(Dense(units = 1))
+regressor.add(Dense(units=1))
 
-# Compiling the RNN
-regressor.compile(optimizer = 'adam', loss = 'mean_squared_error')
+regressor.compile(optimizer = 'adam', loss='mean_squared_error')
 
-# Fitting the RNN to the Training set
-regressor.fit(X_train, y_train, epochs = 100, batch_size = 32)
+regressor.fit(X_train, y_train, batch_size = 32, epochs = 100)
 
+real_stock_price = pd.read_csv('Google_Stock_Price_Test.csv').iloc[:, 1:2].values
 
-
-# Part 3 - Making the predictions and visualising the results
-
-# Getting the real stock price of 2017
-dataset_test = pd.read_csv('Google_Stock_Price_Test.csv')
-real_stock_price = dataset_test.iloc[:, 1:2].values
+#start to have problem...
 
 # Getting the predicted stock price of 2017
 dataset_total = pd.concat((dataset_train['Open'], dataset_test['Open']), axis = 0)
