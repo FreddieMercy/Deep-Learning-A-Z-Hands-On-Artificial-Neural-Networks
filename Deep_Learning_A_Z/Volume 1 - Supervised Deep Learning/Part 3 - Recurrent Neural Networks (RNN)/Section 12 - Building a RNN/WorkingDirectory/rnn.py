@@ -57,13 +57,14 @@ regressor.compile(optimizer = 'adam', loss='mean_squared_error')
 
 regressor.fit(X_train, y_train, batch_size = 32, epochs = 100)
 
-real_stock_price = pd.read_csv('Google_Stock_Price_Test.csv').iloc[:, 1:2].values
+dataset_test = pd.read_csv('Google_Stock_Price_Test.csv')
+real_stock_price = dataset_test.iloc[:, 1:2].values
 
 #start to have problem...
 
 # Getting the predicted stock price of 2017
 dataset_total = pd.concat((dataset_train['Open'], dataset_test['Open']), axis = 0)
-inputs = dataset_total[len(dataset_total) - len(dataset_test) - 60:].values
+inputs = dataset_total[len(dataset_train) - 60:].values
 inputs = inputs.reshape(-1,1)
 inputs = sc.transform(inputs)
 X_test = []
