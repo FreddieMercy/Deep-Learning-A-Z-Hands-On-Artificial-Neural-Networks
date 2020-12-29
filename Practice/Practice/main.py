@@ -1,4 +1,4 @@
-from src.numpyPractice import numpyPractice
+from src.NumpyPractice import numpyPractice
 
 
 def main():
