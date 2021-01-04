@@ -19,3 +19,20 @@ df.iloc[2, 1]
 
 for index, row in df.iterrows():
     print(index, row)
+
+print(df.loc[df['Name'] == 'Bulbasaur'])
+print(df.describe())
+
+df.sort_values('Name', ascending=False)
+df.sort_values(['Name', 'HP'], ascending=False)
+df.sort_values(['Name', 'HP'], ascending=[1, 0])  # Aseconding Name, descending HP
+df['Total'] = df['HP'] + df['Attack']
+print(df)
+
+df['Total2'] = df.iloc[:, 4:10].sum(axis=1)
+print(df)
+
+col = list(df.columns)
+df = df[col[0:4] + [col[-1]] + col[4:12]]
+
+df.head(5)
