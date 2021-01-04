@@ -36,3 +36,7 @@ col = list(df.columns)
 df = df[col[0:4] + [col[-1]] + col[4:12]]
 
 df.head(5)
+
+df.to_csv('data/pokemon_data/modified.csv')
+df.to_csv('data/pokemon_data/modified2.csv', index=False)
+df.to_csv('data/pokemon_data/modified3.txt', index=False, sep='\t')
