@@ -42,6 +42,9 @@ def numpyPractice():
     rndNumSth = np.random.randint(4, 7, size=(5, 3))  # randint: (from) 4 (to) 7 in 5 by 3
     print(rndNumSth)
 
+    rnd_num_arr = np.random.randn(5, 3)  # randn: in array 5 by 3
+    print(rnd_num_arr)
+
     print(np.identity(5))  # identity matrix
 
     arr = np.array([1, 2, 3])
