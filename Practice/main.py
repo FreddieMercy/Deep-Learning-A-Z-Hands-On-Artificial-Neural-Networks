@@ -1,22 +1,12 @@
-from sklearn import datasets, neighbors, metrics
-from sklearn.model_selection import train_test_split
-from sklearn.preprocessing import LabelEncoder
-import pandas as pd
+from sklearn import model_selection, linear_model
+from matplotlib import pyplot
 
-iris = datasets.load_iris()
-x = iris.data
-y = iris.target
+reg = linear_model.LinearRegression()  # Like R, reg should be a line
+data = [[0, 0], [1, 1], [2, 2]]
+target = [0, 1, 2]
+reg.fit(data, target)
 
-print(x.shape)
-print(y.shape)
+print(reg.coef_)
 
-x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.2)  # so train size -> 1 - 0.2 = 0.8?
-
-print(x_train.shape)
-print(x_test.shape)
-print(y_train.shape)
-print(x_test.shape)
-
-data = pd.read_csv('data/data.txt', delimiter='\t')
-
-print(data)
+pyplot.plot(data, reg.predict(data))
+pyplot.show()
