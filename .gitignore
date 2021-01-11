@@ -75,3 +75,9 @@ fabric.properties
 .DS_Store
 
 **-checkpoint.ipynb
+
+*.so
+*.dylib 
+
+REQUESTED
+RECORD
