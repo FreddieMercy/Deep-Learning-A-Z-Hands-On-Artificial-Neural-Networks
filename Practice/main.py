@@ -1,12 +1,14 @@
-from sklearn import model_selection, linear_model
-from matplotlib import pyplot
+from src.MatplotlibPractice import matplotlibPractice
+from src.NumpyPractice import numpyPractice
+from src.PandasPractice import pandasPractice
+from src.SklearnPractice.LinearRegression import linearRegressionPractice
 
-reg = linear_model.LinearRegression()  # Like R, reg should be a line
-data = [[0, 0], [1, 1], [2, 2]]
-target = [0, 1, 2]
-reg.fit(data, target)
 
-print(reg.coef_)
+def main():
+    numpyPractice()
+    matplotlibPractice()
+    pandasPractice()
+    linearRegressionPractice()
 
-pyplot.plot(data, reg.predict(data))
-pyplot.show()
+
+main()
