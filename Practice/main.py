@@ -12,3 +12,7 @@ clf = svm.SVC()  # why no alpha?
 clf.fit(data, target)
 
 print(clf.predict([[100000, -100]]))
+
+print(clf.support_)  # target
+print(clf.support_vectors_)  # data
+print(clf.n_support_)  # idk...
