@@ -1,18 +1,16 @@
-from sklearn import svm  # S.V. Machine (Support Vector Machine)
-import numpy as np
+from src.MatplotlibPractice import matplotlibPractice
+from src.NumpyPractice import numpyPractice
+from src.PandasPractice import pandasPractice
+from src.SklearnPractice.LinearRegression import linearRegressionPractice
+from src.SklearnPractice.SVC import svcPractice
 
-data = np.array([np.arange(0, 9), np.arange(0, 9)])
-data = data.T
-target = np.arange(0, 9)
 
-print(data)
-print(target)
+def main():
+    numpyPractice()
+    matplotlibPractice()
+    pandasPractice()
+    linearRegressionPractice()
+    svcPractice()
 
-clf = svm.SVC()  # why no alpha?
-clf.fit(data, target)
 
-print(clf.predict([[100000, -100]]))
-
-print(clf.support_)  # target
-print(clf.support_vectors_)  # data
-print(clf.n_support_)  # idk...
+main()
