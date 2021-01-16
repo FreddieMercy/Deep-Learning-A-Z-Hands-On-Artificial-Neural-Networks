@@ -129,3 +129,12 @@ def linearRegressionPractice():
 
     model = model.fit(A[:, np.newaxis], B)
     print(model.named_steps['linear'].coef_)
+
+    sgd = linear_model.SGDClassifier(loss="hinge",
+                                     penalty="l2",  # Ridge?
+                                     max_iter=2000)
+
+    sgd.fit(data, target)
+
+    print(sgd.predict([[100000, -100]]))
+    print(reg.predict([[100000, -100]]))
