@@ -130,6 +130,8 @@ def linearRegressionPractice():
     model = model.fit(A[:, np.newaxis], B)
     print(model.named_steps['linear'].coef_)
 
+    # A linear classifier optimized by the SGD. It can define what Machine Learning Model ('loss' function) to use,
+    # which will be optimized by SGD (i.e: Logical Regression optimized by SGD)
     sgd = linear_model.SGDClassifier(loss="hinge",
                                      penalty="l2",  # Ridge?
                                      max_iter=2000)
