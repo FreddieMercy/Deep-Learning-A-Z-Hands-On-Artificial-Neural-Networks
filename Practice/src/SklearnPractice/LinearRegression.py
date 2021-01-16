@@ -5,6 +5,8 @@ from matplotlib import pyplot
 def linearRegressionPractice():
     pyplot.subplots()  # start new plot figure
     reg = linear_model.LinearRegression()  # Like R, reg should be a line
+    # difference between LinearRegression and Logistic regression:
+    # https://stackoverflow.com/questions/12146914/what-is-the-difference-between-linear-regression-and-logistic-regression#:~:text=In%20linear%20regression%2C%20the%20outcome,limited%20number%20of%20possible%20values.&text=Logistic%20regression%20is%20used%20when%20the%20response%20variable%20is%20categorical%20in%20nature.
     data = [[0, 0], [1, 1], [2, 2]]
     target = [0, 1, 2]
     reg.fit(data, target)
