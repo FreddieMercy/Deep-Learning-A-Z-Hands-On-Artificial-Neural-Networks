@@ -3,6 +3,7 @@ from src.NumpyPractice import numpyPractice
 from src.PandasPractice import pandasPractice
 from src.SklearnPractice.LinearRegression import linearRegressionPractice
 from src.SklearnPractice.SVC import svcPractice
+from src.SklearnPractice.NearestNeighbors import nearestNeighborsPractice
 
 
 def main():
@@ -11,6 +12,7 @@ def main():
     pandasPractice()
     linearRegressionPractice()
     svcPractice()
+    nearestNeighborsPractice()
 
 
 main()
