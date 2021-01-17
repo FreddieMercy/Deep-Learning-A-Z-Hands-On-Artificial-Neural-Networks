@@ -79,7 +79,12 @@ def nearestNeighborsPractice():
 
     nca = neighbors.NeighborhoodComponentsAnalysis(random_state=42)
     knn = neighbors.KNeighborsClassifier(n_neighbors=3)
-    nca_knn = Pipeline([('nca', nca), ('knn', knn)])
+
+    # 重新起一个，不然会打脸的 - -||
+    # nca_knn = Pipeline([('nca', nca), ('knn', knn)])
+
+    nca_knn = Pipeline([('nca', neighbors.NeighborhoodComponentsAnalysis(random_state=42)),
+                        ('knn', neighbors.KNeighborsClassifier(n_neighbors=3))])
     nca_knn.fit(data_train, target_train)
     # nca_knn.fit(data2, target2)
     knn.fit(data_train, target_train)
@@ -91,9 +96,15 @@ def nearestNeighborsPractice():
 
     bay.fit(data_train, target_train)
 
-    # 嗯... 这实力打脸是怎么做到的 - -||
+    from sklearn import tree
+
+    dt_clf = tree.DecisionTreeClassifier()
+
+    dt_clf.fit(data_train, target_train)
+
     print(nca_knn.score(data_test, target_test))
     print(knn.score(data_test, target_test))
     print(nc.score(data_test, target_test))
     print(svc.score(data_test, target_test))
     print(bay.score(data_test, target_test))
+    print(dt_clf.score(data_test, target_test))
