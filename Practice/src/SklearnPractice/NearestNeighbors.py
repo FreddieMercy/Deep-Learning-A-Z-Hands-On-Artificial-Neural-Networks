@@ -86,8 +86,14 @@ def nearestNeighborsPractice():
     nc.fit(data_train, target_train)
     svc.fit(data_train, target_train)
 
+    from sklearn.naive_bayes import GaussianNB
+    bay = GaussianNB()
+
+    bay.fit(data_train, target_train)
+
     # 嗯... 这实力打脸是怎么做到的 - -||
     print(nca_knn.score(data_test, target_test))
     print(knn.score(data_test, target_test))
     print(nc.score(data_test, target_test))
     print(svc.score(data_test, target_test))
+    print(bay.score(data_test, target_test))
