@@ -102,9 +102,13 @@ def nearestNeighborsPractice():
 
     dt_clf.fit(data_train, target_train)
 
+    dt_reg = tree.DecisionTreeRegressor()
+    dt_reg.fit(data_train, target_train)
+
     print(nca_knn.score(data_test, target_test))
     print(knn.score(data_test, target_test))
     print(nc.score(data_test, target_test))
     print(svc.score(data_test, target_test))
     print(bay.score(data_test, target_test))
     print(dt_clf.score(data_test, target_test))
+    print(dt_reg.score(data_test, target_test))
