@@ -33,3 +33,12 @@ print(cross_val_score(exTree, data_test, target_test, cv=5).mean())
 print(cross_val_predict(bagging, data_test, target_test, cv=5))
 print(cross_val_predict(rndForest, data_test, target_test, cv=5))
 print(cross_val_predict(exTree, data_test, target_test, cv=5))
+
+from sklearn.ensemble import AdaBoostClassifier
+
+ada_clf = AdaBoostClassifier(n_estimators=100)  # strengthen weakness
+ada_clf.fit(data_train, target_train)
+
+print(ada_clf.score(data_test, target_test))
+print(cross_val_score(ada_clf, data_test, target_test, cv=5).mean())
+print(cross_val_predict(ada_clf, data_test, target_test, cv=5))
