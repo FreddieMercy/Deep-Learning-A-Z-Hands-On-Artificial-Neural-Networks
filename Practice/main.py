@@ -15,13 +15,13 @@ bagging = BaggingClassifier(max_samples=0.5,  # half rows
 
 # better than Bagging: can define how many estimators, rather than unknown number of estimators
 # worse than Bagging: cannot define the base_estimator
-
 rndForest = RandomForestClassifier(n_estimators=10)
 
 exTree = ExtraTreesClassifier(max_samples=0.5,  # half rows
                               max_features=0.5,  # half columns
                               n_estimators=10)
 
+# Basically the same
 bagging.fit(data_train, target_train)
 rndForest.fit(data_train, target_train)
 exTree.fit(data_train, target_train)
