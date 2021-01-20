@@ -91,64 +91,7 @@ def nearestNeighborsPractice():
     nc.fit(data_train, target_train)
     svc.fit(data_train, target_train)
 
-    from sklearn.naive_bayes import GaussianNB
-    bay = GaussianNB()
-
-    bay.fit(data_train, target_train)
-
-    from sklearn import tree
-
-    dt_clf = tree.DecisionTreeClassifier()
-
-    dt_clf.fit(data_train, target_train)
-
-    dt_reg = tree.DecisionTreeRegressor()
-    dt_reg.fit(data_train, target_train)
-
-    from sklearn.ensemble import BaggingClassifier, RandomForestClassifier, ExtraTreesClassifier
-    # ensemble means "vote"
-    from sklearn.neighbors import KNeighborsClassifier
-
-    bagging = BaggingClassifier(max_samples=0.5,  # half rows
-                                max_features=0.5,  # half columns
-                                base_estimator=KNeighborsClassifier())
-
-    # better than Bagging: can define how many estimators, rather than unknown number of estimators
-    # worse than Bagging: cannot define the base_estimator
-
-    rndForest = RandomForestClassifier(n_estimators=10)
-
-    exTree = ExtraTreesClassifier(max_samples=0.5,  # half rows
-                                  max_features=0.5,  # half columns
-                                  n_estimators=10)
-
-    bagging.fit(data_train, target_train)
-    rndForest.fit(data_train, target_train)
-    exTree.fit(data_train, target_train)
-
-    from sklearn.ensemble import AdaBoostClassifier
-
-    ada_clf = AdaBoostClassifier(n_estimators=100)  # strengthen weakness
-    ada_clf.fit(data_train, target_train)
-
-    from sklearn.ensemble import GradientBoostingClassifier, GradientBoostingRegressor
-
-    gbc = GradientBoostingClassifier(n_estimators=100)
-    gbc.fit(data_train, target_train)
-
-    gbr = GradientBoostingRegressor(n_estimators=100)
-    gbr.fit(data_train, target_train)
-
     print(nca_knn.score(data_test, target_test))
     print(knn.score(data_test, target_test))
     print(nc.score(data_test, target_test))
     print(svc.score(data_test, target_test))
-    print(bay.score(data_test, target_test))
-    print(dt_clf.score(data_test, target_test))
-    print(dt_reg.score(data_test, target_test))
-    print(bagging.score(data_test, target_test))
-    print(rndForest.score(data_test, target_test))
-    print(exTree.score(data_test, target_test))
-    print(ada_clf.score(data_test, target_test))
-    print(gbc.score(data_test, target_test))
-    print(gbr.score(data_test, target_test))
