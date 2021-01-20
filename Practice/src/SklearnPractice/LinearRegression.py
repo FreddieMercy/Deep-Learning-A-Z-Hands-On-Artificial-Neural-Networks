@@ -62,7 +62,7 @@ def linearRegressionPractice():
     print(lasso.coef_)
     pyplot.plot(data3, lasso.predict(data3))
 
-    lassolars = linear_model.LassoLars(alpha=0.1)
+    lassolars = linear_model.LassoLars(alpha=0.1)  # Lars is an algorithm, faster but may lose accuracy
 
     lassolars.fit(data3, target3)
     print(lassolars.coef_)
@@ -79,7 +79,7 @@ def linearRegressionPractice():
     # power = 3: Inverse Gaussian distribution.
 
     tr0 = linear_model.TweedieRegressor(power=0, alpha=0.5,
-                                        link='log')  # unlink power = 1 or 2, it is not equivalent to Ridge(alpha=0.5)
+                                        link='log')  # unlike power = 1 or 2, it is not equivalent to Ridge(alpha=0.5)
     tr0.fit(data, target)
     print(tr0.coef_)
     pyplot.plot(data, tr0.predict(data))
