@@ -131,6 +131,14 @@ def nearestNeighborsPractice():
     ada_clf = AdaBoostClassifier(n_estimators=100)  # strengthen weakness
     ada_clf.fit(data_train, target_train)
 
+    from sklearn.ensemble import GradientBoostingClassifier, GradientBoostingRegressor
+
+    gbc = GradientBoostingClassifier(n_estimators=100)
+    gbc.fit(data_train, target_train)
+
+    gbr = GradientBoostingRegressor(n_estimators=100)
+    gbr.fit(data_train, target_train)
+
     print(nca_knn.score(data_test, target_test))
     print(knn.score(data_test, target_test))
     print(nc.score(data_test, target_test))
@@ -142,3 +150,5 @@ def nearestNeighborsPractice():
     print(rndForest.score(data_test, target_test))
     print(exTree.score(data_test, target_test))
     print(ada_clf.score(data_test, target_test))
+    print(gbc.score(data_test, target_test))
+    print(gbr.score(data_test, target_test))

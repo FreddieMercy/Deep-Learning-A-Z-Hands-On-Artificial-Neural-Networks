@@ -42,3 +42,19 @@ ada_clf.fit(data_train, target_train)
 print(ada_clf.score(data_test, target_test))
 print(cross_val_score(ada_clf, data_test, target_test, cv=5).mean())
 print(cross_val_predict(ada_clf, data_test, target_test, cv=5))
+
+from sklearn.ensemble import GradientBoostingClassifier, GradientBoostingRegressor
+
+gbc = GradientBoostingClassifier(n_estimators=100)  # it is a decision tree, so it could be un-stable?
+gbc.fit(data_train, target_train)
+
+print(gbc.score(data_test, target_test))
+print(cross_val_score(gbc, data_test, target_test, cv=5).mean())
+print(cross_val_predict(gbc, data_test, target_test, cv=5))
+
+gbr = GradientBoostingRegressor(n_estimators=100)  # it is a decision tree, so it could be un-stable?
+gbr.fit(data_train, target_train)
+
+print(gbr.score(data_test, target_test))
+print(cross_val_score(gbr, data_test, target_test, cv=5).mean())
+print(cross_val_predict(gbr, data_test, target_test, cv=5))
