@@ -1,20 +1,16 @@
-from src.MatplotlibPractice import matplotlibPractice
-from src.NumpyPractice import numpyPractice
-from src.PandasPractice import pandasPractice
-from src.SklearnPractice.LinearRegression import linearRegressionPractice
-from src.SklearnPractice.SVC import svcPractice
-from src.SklearnPractice.NearestNeighbors import nearestNeighborsPractice
-from src.SklearnPractice.DecisionTree import decisionTreePractice
+from sklearn.ensemble import BaggingClassifier, RandomForestClassifier, ExtraTreesClassifier
+# ensemble means "vote"
+from sklearn.neighbors import KNeighborsClassifier
 
+bagging = BaggingClassifier(max_samples=0.5,  # half rows
+                            max_features=0.5,  # half columns
+                            base_estimator=KNeighborsClassifier())
 
-def main():
-    numpyPractice()
-    matplotlibPractice()
-    pandasPractice()
-    linearRegressionPractice()
-    svcPractice()
-    nearestNeighborsPractice()
-    decisionTreePractice()
+# better than Bagging: can define how many estimators, rather than unknown number of estimators
+# worse than Bagging: cannot define the base_estimator
 
+rndForest = RandomForestClassifier(n_estimators=10)
 
-main()
+exTree = ExtraTreesClassifier(max_samples=0.5,  # half rows
+                              max_features=0.5,  # half columns
+                              n_estimators=10)
