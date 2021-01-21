@@ -76,3 +76,18 @@ vc.fit(data_train, target_train)
 print(vc.score(data_test, target_test))
 print(cross_val_score(vc, data_test, target_test, cv=5).mean())
 print(cross_val_predict(vc, data_test, target_test, cv=5))
+
+from sklearn.ensemble import VotingRegressor
+from sklearn.linear_model import BayesianRidge, LassoLars, LinearRegression
+
+vr = VotingRegressor(
+    estimators=[("BayesianRidge", BayesianRidge()), ("LassoLars", LassoLars(alpha=0.05)),
+                ("LinearRegression", LinearRegression()),
+                ("SVR", svm.SVR())],
+    weights=[2, 1, 2, 1])
+
+vr.fit(data_train, target_train)
+
+print(vr.score(data_test, target_test))
+print(cross_val_score(vr, data_test, target_test, cv=5).mean())
+print(cross_val_predict(vr, data_test, target_test, cv=5))

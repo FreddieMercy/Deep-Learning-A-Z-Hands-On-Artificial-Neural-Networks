@@ -1,12 +1,12 @@
 from sklearn.datasets import load_iris
 from sklearn.ensemble import AdaBoostClassifier, BaggingClassifier, RandomForestClassifier, ExtraTreesClassifier, \
-    GradientBoostingClassifier, GradientBoostingRegressor, VotingClassifier
+    GradientBoostingClassifier, GradientBoostingRegressor, VotingClassifier, VotingRegressor
 from sklearn.model_selection import train_test_split
 from sklearn.naive_bayes import GaussianNB
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.pipeline import Pipeline
 from sklearn import neighbors, svm
-from sklearn.linear_model import LogisticRegression
+from sklearn.linear_model import LogisticRegression, BayesianRidge, LassoLars, LinearRegression
 
 
 def Comparison():
@@ -79,6 +79,14 @@ def Comparison():
 
     vc.fit(data_train, target_train)
 
+    vr = VotingRegressor(
+        estimators=[("BayesianRidge", BayesianRidge()), ("LassoLars", LassoLars(alpha=0.05)),
+                    ("LinearRegression", LinearRegression()),
+                    ("SVR", svm.SVR())],
+        weights=[2, 1, 2, 1])
+
+    vr.fit(data_train, target_train)
+
     print(nca_knn.score(data_test, target_test))
     print(knn.score(data_test, target_test))
     print(nc.score(data_test, target_test))
@@ -93,3 +101,4 @@ def Comparison():
     print(gbc.score(data_test, target_test))
     print(gbr.score(data_test, target_test))
     print(vc.score(data_test, target_test))
+    print(vr.score(data_test, target_test))
