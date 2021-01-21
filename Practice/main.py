@@ -91,3 +91,30 @@ vr.fit(data_train, target_train)
 print(vr.score(data_test, target_test))
 print(cross_val_score(vr, data_test, target_test, cv=5).mean())
 print(cross_val_predict(vr, data_test, target_test, cv=5))
+
+from sklearn.ensemble import StackingClassifier
+
+sc = StackingClassifier(
+    estimators=[("someone", rndForest), ("bagging", bagging), ("LogisticRegression", LogisticRegression())],  # FIFO
+    final_estimator=svm.SVC(), cv=5)  # final_estimator is trained by cross validation
+
+sc.fit(data_train, target_train)
+
+print(sc.score(data_test, target_test))
+# since final_estimator is trained by cross validation, thus cannot use cross validation anymore (or, less cv)
+# print(cross_val_score(sc, data_test, target_test, cv=5).mean())
+# print(cross_val_predict(sc, data_test, target_test, cv=5))
+
+from sklearn.ensemble import StackingRegressor
+
+sr = StackingRegressor(
+    estimators=[("BayesianRidge", BayesianRidge()), ("LassoLars", LassoLars(alpha=0.05)),
+                ("LinearRegression", LinearRegression())],
+    final_estimator=svm.SVR(), cv=5)
+
+sr.fit(data_train, target_train)
+
+print(sr.score(data_test, target_test))
+# since final_estimator is trained by cross validation, thus cannot use cross validation anymore (or, less cv)
+# print(cross_val_score(sr, data_test, target_test, cv=5).mean())
+# print(cross_val_predict(sr, data_test, target_test, cv=5))

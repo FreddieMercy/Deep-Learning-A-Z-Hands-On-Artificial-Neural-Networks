@@ -1,6 +1,7 @@
 from sklearn.datasets import load_iris
 from sklearn.ensemble import AdaBoostClassifier, BaggingClassifier, RandomForestClassifier, ExtraTreesClassifier, \
-    GradientBoostingClassifier, GradientBoostingRegressor, VotingClassifier, VotingRegressor
+    GradientBoostingClassifier, GradientBoostingRegressor, VotingClassifier, VotingRegressor, \
+    StackingClassifier, StackingRegressor
 from sklearn.model_selection import train_test_split
 from sklearn.naive_bayes import GaussianNB
 from sklearn.neighbors import KNeighborsClassifier
@@ -87,6 +88,19 @@ def Comparison():
 
     vr.fit(data_train, target_train)
 
+    sc = StackingClassifier(
+        estimators=[("someone", rndForest), ("bagging", bagging), ("LogisticRegression", LogisticRegression())],  # FIFO
+        final_estimator=svm.SVC(), cv=5)  # final_estimator is trained by cross validation
+
+    sc.fit(data_train, target_train)
+
+    sr = StackingRegressor(
+        estimators=[("BayesianRidge", BayesianRidge()), ("LassoLars", LassoLars(alpha=0.05)),
+                    ("LinearRegression", LinearRegression())],
+        final_estimator=svm.SVR(), cv=5)
+
+    sr.fit(data_train, target_train)
+
     print(nca_knn.score(data_test, target_test))
     print(knn.score(data_test, target_test))
     print(nc.score(data_test, target_test))
@@ -102,3 +116,5 @@ def Comparison():
     print(gbr.score(data_test, target_test))
     print(vc.score(data_test, target_test))
     print(vr.score(data_test, target_test))
+    print(sc.score(data_test, target_test))
+    print(sr.score(data_test, target_test))
