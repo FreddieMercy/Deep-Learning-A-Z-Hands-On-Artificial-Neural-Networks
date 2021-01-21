@@ -1,11 +1,12 @@
 from sklearn.datasets import load_iris
 from sklearn.ensemble import AdaBoostClassifier, BaggingClassifier, RandomForestClassifier, ExtraTreesClassifier, \
-    GradientBoostingClassifier, GradientBoostingRegressor
+    GradientBoostingClassifier, GradientBoostingRegressor, VotingClassifier
 from sklearn.model_selection import train_test_split
 from sklearn.naive_bayes import GaussianNB
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.pipeline import Pipeline
 from sklearn import neighbors, svm
+from sklearn.linear_model import LogisticRegression
 
 
 def Comparison():
@@ -69,6 +70,15 @@ def Comparison():
     gbr = GradientBoostingRegressor(n_estimators=100)
     gbr.fit(data_train, target_train)
 
+    # hard vote: 少数服从多数， 如果平票，那按字母排列选第一个
+    # soft vote：take average
+    vc = VotingClassifier(
+        estimators=[("someone", rndForest), ("bagging", bagging), ("LogisticRegression", LogisticRegression()),
+                    ("SVC", svm.SVC())],  # like Pipeline
+        voting="hard")
+
+    vc.fit(data_train, target_train)
+
     print(nca_knn.score(data_test, target_test))
     print(knn.score(data_test, target_test))
     print(nc.score(data_test, target_test))
@@ -82,3 +92,4 @@ def Comparison():
     print(ada_clf.score(data_test, target_test))
     print(gbc.score(data_test, target_test))
     print(gbr.score(data_test, target_test))
+    print(vc.score(data_test, target_test))

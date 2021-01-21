@@ -1,5 +1,5 @@
 from sklearn.ensemble import BaggingClassifier, RandomForestClassifier, ExtraTreesClassifier
-# ensemble means "vote"
+# ensemble means "take mean"
 from sklearn.neighbors import KNeighborsClassifier
 
 from sklearn.datasets import load_iris
@@ -58,3 +58,21 @@ gbr.fit(data_train, target_train)
 print(gbr.score(data_test, target_test))
 print(cross_val_score(gbr, data_test, target_test, cv=5).mean())
 print(cross_val_predict(gbr, data_test, target_test, cv=5))
+
+from sklearn.ensemble import VotingClassifier
+from sklearn.linear_model import LogisticRegression
+from sklearn import svm
+
+vc = VotingClassifier(
+    estimators=[("someone", rndForest), ("bagging", bagging), ("LogisticRegression", LogisticRegression()),
+                ("SVC", svm.SVC())],  # like Pipeline
+    # hard vote: 少数服从多数， 如果平票，那按字母排列选第一个
+    # soft vote：take average
+    voting="hard",
+    weights=[2, 1, 2, 1])
+
+vc.fit(data_train, target_train)
+
+print(vc.score(data_test, target_test))
+print(cross_val_score(vc, data_test, target_test, cv=5).mean())
+print(cross_val_predict(vc, data_test, target_test, cv=5))
