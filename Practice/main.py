@@ -5,6 +5,8 @@ from src.SklearnPractice.LinearRegression import linearRegressionPractice
 from src.SklearnPractice.SVC import svcPractice
 from src.SklearnPractice.NearestNeighbors import nearestNeighborsPractice
 from src.SklearnPractice.DecisionTree import decisionTreePractice
+from src.SklearnPractice.Ensemble import ensemblePractice
+from Comparison import Comparison
 
 
 def main():
@@ -15,6 +17,9 @@ def main():
     svcPractice()
     nearestNeighborsPractice()
     decisionTreePractice()
+    ensemblePractice()
 
 
 main()
+print("--------------------------------------------------------------------")
+Comparison()
