@@ -1,4 +1,4 @@
-from sklearn.datasets import load_iris
+from sklearn.datasets import load_iris, make_classification, make_multilabel_classification
 from sklearn.ensemble import AdaBoostClassifier, BaggingClassifier, RandomForestClassifier, ExtraTreesClassifier, \
     GradientBoostingClassifier, GradientBoostingRegressor, VotingClassifier, VotingRegressor, \
     StackingClassifier, StackingRegressor
@@ -9,6 +9,7 @@ from sklearn.pipeline import Pipeline
 from sklearn import neighbors, svm
 from sklearn.linear_model import LogisticRegression, BayesianRidge, LassoLars, LinearRegression
 from sklearn.multiclass import OneVsOneClassifier, OneVsRestClassifier, OutputCodeClassifier
+from sklearn.multioutput import MultiOutputRegressor, MultiOutputClassifier
 
 
 def Comparison():
@@ -159,3 +160,33 @@ def Comparison():
     print(outputClass5.score(data_test, target_test))
     print(outputClass6.score(data_test, target_test))
     print(outputClass7.score(data_test, target_test))
+
+    X, Y = make_multilabel_classification(n_samples=10, n_features=100, n_classes=3)
+    X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=0.7)
+
+    # What is the use of it... at least I know # of jobs doesn't affect results
+
+    mulOutputClass1 = MultiOutputClassifier(n_jobs=1, estimator=RandomForestClassifier())
+    mulOutputClass2 = MultiOutputClassifier(n_jobs=2, estimator=RandomForestClassifier())
+    mulOutputClass3 = MultiOutputClassifier(n_jobs=3, estimator=RandomForestClassifier())
+    mulOutputClass4 = MultiOutputClassifier(n_jobs=4, estimator=RandomForestClassifier())
+    mulOutputClass5 = MultiOutputClassifier(n_jobs=5, estimator=RandomForestClassifier())
+    mulOutputClass6 = MultiOutputClassifier(n_jobs=6, estimator=RandomForestClassifier())
+    mulOutputClass7 = MultiOutputClassifier(n_jobs=7, estimator=RandomForestClassifier())
+
+    mulOutputClass1.fit(X_train, Y_train)
+    mulOutputClass2.fit(X_train, Y_train)
+    mulOutputClass3.fit(X_train, Y_train)
+    mulOutputClass4.fit(X_train, Y_train)
+    mulOutputClass5.fit(X_train, Y_train)
+    mulOutputClass6.fit(X_train, Y_train)
+    mulOutputClass7.fit(X_train, Y_train)
+
+    print("\n+ MultiOutputClassifier: ")
+    print(mulOutputClass1.score(X_test, Y_test))
+    print(mulOutputClass2.score(X_test, Y_test))
+    print(mulOutputClass3.score(X_test, Y_test))
+    print(mulOutputClass4.score(X_test, Y_test))
+    print(mulOutputClass5.score(X_test, Y_test))
+    print(mulOutputClass6.score(X_test, Y_test))
+    print(mulOutputClass7.score(X_test, Y_test))
