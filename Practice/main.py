@@ -1,25 +1,18 @@
-from src.MatplotlibPractice import matplotlibPractice
-from src.NumpyPractice import numpyPractice
-from src.PandasPractice import pandasPractice
-from src.SklearnPractice.LinearRegression import linearRegressionPractice
-from src.SklearnPractice.SVC import svcPractice
-from src.SklearnPractice.NearestNeighbors import nearestNeighborsPractice
-from src.SklearnPractice.DecisionTree import decisionTreePractice
-from src.SklearnPractice.Ensemble import ensemblePractice
-from Comparison import Comparison
+from sklearn.preprocessing import LabelBinarizer
+from sklearn.datasets import load_iris
+from sklearn.model_selection import train_test_split
+import numpy as np
 
+data_i, targeti = load_iris(return_X_y=True)
+data_train, data_test, target_train, target_test = train_test_split(data_i, targeti, random_state=42,
+                                                                    stratify=targeti, test_size=0.7)
 
-def main():
-    numpyPractice()
-    matplotlibPractice()
-    pandasPractice()
-    linearRegressionPractice()
-    svcPractice()
-    nearestNeighborsPractice()
-    decisionTreePractice()
-    ensemblePractice()
+zero_to_two = np.arange(0, 3)
+lb = LabelBinarizer()
+print(zero_to_two)
 
-
-main()
-print("--------------------------------------------------------------------")
-Comparison()
+# tmp = [0,1,2]
+# [1, 0 ,0] means first item in tmp (a.k.a: 0)
+# [0, 1 ,0] means second item in tmp (a.k.a: 1)
+# [0, 0 ,1] means third item in tmp (a.k.a: 2)
+print(lb.fit_transform(zero_to_two))
