@@ -8,6 +8,7 @@ from sklearn.neighbors import KNeighborsClassifier
 from sklearn.pipeline import Pipeline
 from sklearn import neighbors, svm
 from sklearn.linear_model import LogisticRegression, BayesianRidge, LassoLars, LinearRegression
+from sklearn.multiclass import OneVsOneClassifier, OneVsRestClassifier, OutputCodeClassifier
 
 
 def Comparison():
@@ -101,6 +102,16 @@ def Comparison():
 
     sr.fit(data_train, target_train)
 
+    # OneVsRestClassifier and OneVsOneClassifier are decorator that decorates the 'estimator'
+    # mulSVC should be same to svc (svc by default is ovr), 但怎么打脸了，还不容易converge？
+    mulSVC = OneVsRestClassifier(estimator=svm.LinearSVC(random_state=0, max_iter=9000))
+    mulSVC.fit(data_train, target_train)
+
+    # 哦，看起来我之前错了：svc by default is ovo。
+    # oneSVC should be same to svc
+    oneSVC = OneVsOneClassifier(estimator=svm.LinearSVC(random_state=0, max_iter=9000))
+    oneSVC.fit(data_train, target_train)
+
     print(nca_knn.score(data_test, target_test))
     print(knn.score(data_test, target_test))
     print(nc.score(data_test, target_test))
@@ -118,3 +129,33 @@ def Comparison():
     print(vr.score(data_test, target_test))
     print(sc.score(data_test, target_test))
     print(sr.score(data_test, target_test))
+    print(mulSVC.score(data_test, target_test))
+    print(oneSVC.score(data_test, target_test))
+
+    # OutputCodeClassifier is also a decorator that decorates the 'estimator'
+    # The most important part is: user can define how many classes are there (code_size)
+
+    outputClass1 = OutputCodeClassifier(code_size=1, estimator=svm.SVC())
+    outputClass2 = OutputCodeClassifier(code_size=2, estimator=svm.SVC())
+    outputClass3 = OutputCodeClassifier(code_size=3, estimator=svm.SVC())
+    outputClass4 = OutputCodeClassifier(code_size=4, estimator=svm.SVC())
+    outputClass5 = OutputCodeClassifier(code_size=5, estimator=svm.SVC())
+    outputClass6 = OutputCodeClassifier(code_size=6, estimator=svm.SVC())
+    outputClass7 = OutputCodeClassifier(code_size=7, estimator=svm.SVC())
+
+    outputClass1.fit(data_train, target_train)
+    outputClass2.fit(data_train, target_train)
+    outputClass3.fit(data_train, target_train)
+    outputClass4.fit(data_train, target_train)
+    outputClass5.fit(data_train, target_train)
+    outputClass6.fit(data_train, target_train)
+    outputClass7.fit(data_train, target_train)
+
+    print("\n* OutputCodeClassifier: ")
+    print(outputClass1.score(data_test, target_test))
+    print(outputClass2.score(data_test, target_test))
+    print(outputClass3.score(data_test, target_test))
+    print(outputClass4.score(data_test, target_test))
+    print(outputClass5.score(data_test, target_test))
+    print(outputClass6.score(data_test, target_test))
+    print(outputClass7.score(data_test, target_test))
