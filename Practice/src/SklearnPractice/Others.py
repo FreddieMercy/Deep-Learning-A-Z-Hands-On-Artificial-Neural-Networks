@@ -13,3 +13,20 @@ def otherPractice():
     # [0, 1 ,0] means second item in tmp (a.k.a: 1)
     # [0, 0 ,1] means third item in tmp (a.k.a: 2)
     print(lb.fit_transform(zero_to_two))
+
+    from sklearn.feature_selection import VarianceThreshold
+
+    X = [[1, 1, 1],
+         [1, 1, 1],
+         [1, 1, 1],
+         [1, 1, 1],
+         [1, 1, 1],
+         [1, 1, 1],
+         [1, 1, 1],
+         [0, 1, 1],
+         [0, 0, 1],
+         [0, 0, 0]]
+
+    sel = VarianceThreshold(threshold=(0.8 * (1 - 0.8)))  # remove all columns that are more than 80% same
+
+    print(sel.fit_transform(X))
