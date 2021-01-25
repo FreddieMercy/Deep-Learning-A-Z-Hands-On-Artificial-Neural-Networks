@@ -4,6 +4,8 @@ from sklearn.feature_selection import SelectKBest, \
 
 X, Y = load_iris(return_X_y=True)
 
+print(X)
+
 kBest_1 = SelectKBest(chi2, k=1)
 kBest_2 = SelectKBest(chi2, k=2)
 kBest_3 = SelectKBest(chi2, k=3)
@@ -13,3 +15,15 @@ print(kBest_1.fit_transform(X, Y))
 print(kBest_2.fit_transform(X, Y))
 print(kBest_3.fit_transform(X, Y))
 print(kBest_4.fit_transform(X, Y))
+
+from sklearn.feature_selection import SelectFromModel
+from sklearn import svm
+from sklearn.model_selection import train_test_split
+
+X_train, X_test, Y_train, Y_test = train_test_split(X, Y, random_state=1, train_size=0.7)
+
+est_orig = svm.SVC()
+est_new = svm.SVC()
+
+est_orig.fit(X, Y)
+print("original: ")
