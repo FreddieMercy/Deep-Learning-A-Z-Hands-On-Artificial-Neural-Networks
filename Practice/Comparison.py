@@ -10,6 +10,7 @@ from sklearn import neighbors, svm
 from sklearn.linear_model import LogisticRegression, BayesianRidge, LassoLars, LinearRegression
 from sklearn.multiclass import OneVsOneClassifier, OneVsRestClassifier, OutputCodeClassifier
 from sklearn.multioutput import MultiOutputRegressor, MultiOutputClassifier
+from sklearn.neural_network import MLPClassifier, MLPRegressor
 
 
 def Comparison():
@@ -132,6 +133,64 @@ def Comparison():
     print(sr.score(data_test, target_test))
     print(mulSVC.score(data_test, target_test))
     print(oneSVC.score(data_test, target_test))
+
+    # Not a lot of improvement with greater 'hidden_layer_sizes' ...
+    mlpc100 = MLPClassifier(solver='lbfgs', alpha=0.05, max_iter=9000, random_state=1, hidden_layer_sizes=(100,))
+    mlpc200 = MLPClassifier(solver='lbfgs', alpha=0.05, max_iter=9000, random_state=1, hidden_layer_sizes=(200,))
+    mlpc300 = MLPClassifier(solver='lbfgs', alpha=0.05, max_iter=9000, random_state=1, hidden_layer_sizes=(300,))
+    mlpc400 = MLPClassifier(solver='lbfgs', alpha=0.05, max_iter=9000, random_state=1, hidden_layer_sizes=(400,))
+    mlpc500 = MLPClassifier(solver='lbfgs', alpha=0.05, max_iter=9000, random_state=1, hidden_layer_sizes=(500,))
+    mlpc600 = MLPClassifier(solver='lbfgs', alpha=0.05, max_iter=9000, random_state=1, hidden_layer_sizes=(600,))
+    mlpc700 = MLPClassifier(solver='lbfgs', alpha=0.05, max_iter=9000, random_state=1, hidden_layer_sizes=(700,))
+    mlpc800 = MLPClassifier(solver='lbfgs', alpha=0.05, max_iter=9000, random_state=1, hidden_layer_sizes=(800,))
+
+    mlpc100.fit(data_train, target_train)
+    mlpc200.fit(data_train, target_train)
+    mlpc300.fit(data_train, target_train)
+    mlpc400.fit(data_train, target_train)
+    mlpc500.fit(data_train, target_train)
+    mlpc600.fit(data_train, target_train)
+    mlpc700.fit(data_train, target_train)
+    mlpc800.fit(data_train, target_train)
+
+    print("\n$ MLPClassifier: ")
+    print(mlpc100.score(data_test, target_test))
+    print(mlpc200.score(data_test, target_test))
+    print(mlpc300.score(data_test, target_test))
+    print(mlpc400.score(data_test, target_test))
+    print(mlpc500.score(data_test, target_test))
+    print(mlpc600.score(data_test, target_test))
+    print(mlpc700.score(data_test, target_test))
+    print(mlpc800.score(data_test, target_test))
+
+    # well, even worse ...
+    mlpr100 = MLPRegressor(solver='lbfgs', alpha=0.05, max_iter=9000, random_state=1, hidden_layer_sizes=(100,))
+    mlpr200 = MLPRegressor(solver='lbfgs', alpha=0.05, max_iter=9000, random_state=1, hidden_layer_sizes=(200,))
+    mlpr300 = MLPRegressor(solver='lbfgs', alpha=0.05, max_iter=9000, random_state=1, hidden_layer_sizes=(300,))
+    mlpr400 = MLPRegressor(solver='lbfgs', alpha=0.05, max_iter=9000, random_state=1, hidden_layer_sizes=(400,))
+    mlpr500 = MLPRegressor(solver='lbfgs', alpha=0.05, max_iter=9000, random_state=1, hidden_layer_sizes=(500,))
+    mlpr600 = MLPRegressor(solver='lbfgs', alpha=0.05, max_iter=9000, random_state=1, hidden_layer_sizes=(600,))
+    mlpr700 = MLPRegressor(solver='lbfgs', alpha=0.05, max_iter=9000, random_state=1, hidden_layer_sizes=(700,))
+    mlpr800 = MLPRegressor(solver='lbfgs', alpha=0.05, max_iter=9000, random_state=1, hidden_layer_sizes=(800,))
+
+    mlpr100.fit(data_train, target_train)
+    mlpr200.fit(data_train, target_train)
+    mlpr300.fit(data_train, target_train)
+    mlpr400.fit(data_train, target_train)
+    mlpr500.fit(data_train, target_train)
+    mlpr600.fit(data_train, target_train)
+    mlpr700.fit(data_train, target_train)
+    mlpr800.fit(data_train, target_train)
+
+    print("\n@ MLPRegressor: ")
+    print(mlpr100.score(data_test, target_test))
+    print(mlpr200.score(data_test, target_test))
+    print(mlpr300.score(data_test, target_test))
+    print(mlpr400.score(data_test, target_test))
+    print(mlpr500.score(data_test, target_test))
+    print(mlpr600.score(data_test, target_test))
+    print(mlpr700.score(data_test, target_test))
+    print(mlpr800.score(data_test, target_test))
 
     # OutputCodeClassifier is also a decorator that decorates the 'estimator'
     # The most important part is: user can define how many classes are there (code_size)
