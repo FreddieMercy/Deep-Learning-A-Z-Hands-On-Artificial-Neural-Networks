@@ -1,4 +1,4 @@
-from sklearn.datasets import load_iris, make_classification, make_multilabel_classification
+from sklearn.datasets import load_iris, make_classification, make_multilabel_classification, load_linnerud
 from sklearn.ensemble import AdaBoostClassifier, BaggingClassifier, RandomForestClassifier, ExtraTreesClassifier, \
     GradientBoostingClassifier, GradientBoostingRegressor, VotingClassifier, VotingRegressor, \
     StackingClassifier, StackingRegressor
@@ -161,18 +161,18 @@ def Comparison():
     print(outputClass6.score(data_test, target_test))
     print(outputClass7.score(data_test, target_test))
 
-    X, Y = make_multilabel_classification(n_samples=10, n_features=100, n_classes=3)
-    X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=0.7)
+    X, Y = make_multilabel_classification(n_samples=10, n_features=100, n_classes=3, random_state=1)
+    X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=0.7, random_state=1)
 
     # What is the use of it... at least I know # of jobs doesn't affect results
 
-    mulOutputClass1 = MultiOutputClassifier(n_jobs=1, estimator=RandomForestClassifier())
-    mulOutputClass2 = MultiOutputClassifier(n_jobs=2, estimator=RandomForestClassifier())
-    mulOutputClass3 = MultiOutputClassifier(n_jobs=3, estimator=RandomForestClassifier())
-    mulOutputClass4 = MultiOutputClassifier(n_jobs=4, estimator=RandomForestClassifier())
-    mulOutputClass5 = MultiOutputClassifier(n_jobs=5, estimator=RandomForestClassifier())
-    mulOutputClass6 = MultiOutputClassifier(n_jobs=6, estimator=RandomForestClassifier())
-    mulOutputClass7 = MultiOutputClassifier(n_jobs=7, estimator=RandomForestClassifier())
+    mulOutputClass1 = MultiOutputClassifier(n_jobs=1, estimator=RandomForestClassifier(random_state=1))
+    mulOutputClass2 = MultiOutputClassifier(n_jobs=2, estimator=RandomForestClassifier(random_state=1))
+    mulOutputClass3 = MultiOutputClassifier(n_jobs=3, estimator=RandomForestClassifier(random_state=1))
+    mulOutputClass4 = MultiOutputClassifier(n_jobs=4, estimator=RandomForestClassifier(random_state=1))
+    mulOutputClass5 = MultiOutputClassifier(n_jobs=5, estimator=RandomForestClassifier(random_state=1))
+    mulOutputClass6 = MultiOutputClassifier(n_jobs=6, estimator=RandomForestClassifier(random_state=1))
+    mulOutputClass7 = MultiOutputClassifier(n_jobs=7, estimator=RandomForestClassifier(random_state=1))
 
     mulOutputClass1.fit(X_train, Y_train)
     mulOutputClass2.fit(X_train, Y_train)
@@ -190,3 +190,33 @@ def Comparison():
     print(mulOutputClass5.score(X_test, Y_test))
     print(mulOutputClass6.score(X_test, Y_test))
     print(mulOutputClass7.score(X_test, Y_test))
+
+    # Why the scores are always negative?
+
+    A, B = load_linnerud(return_X_y=True)
+    A_train, A_test, B_train, B_test = train_test_split(A, B, test_size=0.7)
+
+    mulOutputReg1 = MultiOutputRegressor(n_jobs=1, estimator=GradientBoostingRegressor(random_state=1))
+    mulOutputReg2 = MultiOutputRegressor(n_jobs=2, estimator=GradientBoostingRegressor(random_state=1))
+    mulOutputReg3 = MultiOutputRegressor(n_jobs=3, estimator=GradientBoostingRegressor(random_state=1))
+    mulOutputReg4 = MultiOutputRegressor(n_jobs=4, estimator=GradientBoostingRegressor(random_state=1))
+    mulOutputReg5 = MultiOutputRegressor(n_jobs=5, estimator=GradientBoostingRegressor(random_state=1))
+    mulOutputReg6 = MultiOutputRegressor(n_jobs=6, estimator=GradientBoostingRegressor(random_state=1))
+    mulOutputReg7 = MultiOutputRegressor(n_jobs=7, estimator=GradientBoostingRegressor(random_state=1))
+
+    mulOutputReg1.fit(A_train, B_train)
+    mulOutputReg2.fit(A_train, B_train)
+    mulOutputReg3.fit(A_train, B_train)
+    mulOutputReg4.fit(A_train, B_train)
+    mulOutputReg5.fit(A_train, B_train)
+    mulOutputReg6.fit(A_train, B_train)
+    mulOutputReg7.fit(A_train, B_train)
+
+    print("\n- MultiOutputRegressor: ")
+    print(mulOutputReg1.score(A_test, B_test))
+    print(mulOutputReg2.score(A_test, B_test))
+    print(mulOutputReg3.score(A_test, B_test))
+    print(mulOutputReg4.score(A_test, B_test))
+    print(mulOutputReg5.score(A_test, B_test))
+    print(mulOutputReg6.score(A_test, B_test))
+    print(mulOutputReg7.score(A_test, B_test))
