@@ -30,7 +30,7 @@ def otherPractice():
     sel = VarianceThreshold(threshold=(0.8 * (1 - 0.8)))  # remove all columns that are more than 80% same
 
     print(sel.fit_transform(X))
-    
+
     from sklearn.datasets import load_iris
     from sklearn.feature_selection import SelectKBest, \
         chi2  # chi2 is a math formula: https://www.google.com/search?q=chi2&oq=chi2&aqs=chrome..69i57j0i10i457j0l2j0i10j0j0i10j0i395l3.261j1j9&sourceid=chrome&ie=UTF-8#wptab=s:H4sIAAAAAAAAAONgVuLSz9U3MDItNitJfsToyi3w8sc9YSmbSWtOXmM04-IKzsgvd80rySypFNLgYoOy5Lj4pJC0aTBI8XAh8Xl2MUm6ppQmJ5Zk5ucl5jjn5yWnFpS45RflluYkLmKVSM7I1C0uLE0sSk1RKEktLlFIg0gBAOCLz8-NAAAA
@@ -69,3 +69,15 @@ def otherPractice():
 
     print(X)
     print(X_new)
+
+    from sklearn.model_selection import KFold
+
+    arr = [i for i in range(0, 10)]
+
+    # print(arr)
+
+    nFold = KFold(n_splits=5)  # split to n rows, each row train : test rate is (total - total/n) : total/n
+    # i.e: split to 5 rows, each row train : test rate is 8 : 2
+    # i.e: split to 2 rows, each row train : test rate is 5 : 5
+    for train, test in nFold.split(arr):
+        print("%s %s" % (train, test))
