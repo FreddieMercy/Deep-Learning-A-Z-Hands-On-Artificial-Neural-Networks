@@ -81,3 +81,12 @@ def otherPractice():
     # i.e: split to 2 rows, each row train : test rate is 5 : 5
     for train, test in nFold.split(arr):
         print("%s %s" % (train, test))
+
+    from sklearn.model_selection import RepeatedKFold
+
+    rnFolder = RepeatedKFold(n_splits=2,
+                             n_repeats=2)  # split to n_splits * n_repeats rows, each row train : test rate is (total - total/n) : total/n
+    # i.e: split to 5*2 rows, each row train : test rate is 8 : 2
+    # i.e: split to 2*2 rows, each row train : test rate is 5 : 5
+    for train, test in rnFolder.split(arr):
+        print("%s %s" % (train, test))
