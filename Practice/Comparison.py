@@ -11,6 +11,7 @@ from sklearn.linear_model import LogisticRegression, BayesianRidge, LassoLars, L
 from sklearn.multiclass import OneVsOneClassifier, OneVsRestClassifier, OutputCodeClassifier
 from sklearn.multioutput import MultiOutputRegressor, MultiOutputClassifier
 from sklearn.neural_network import MLPClassifier, MLPRegressor
+from sklearn.calibration import CalibratedClassifierCV
 
 
 def Comparison():
