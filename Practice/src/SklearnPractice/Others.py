@@ -90,3 +90,17 @@ def otherPractice():
     # i.e: split to 2*2 rows, each row train : test rate is 5 : 5
     for train, test in rnFolder.split(arr):
         print("%s %s" % (train, test))
+
+    from sklearn.model_selection import LeaveOneOut, LeavePOut
+
+    oneOut = LeaveOneOut()
+
+    # len(arr) rows
+    for train, test in oneOut.split(arr):
+        print("%s %s" % (train, test))
+
+    pOut = LeavePOut(p=2)
+
+    # p * len(arr) rows
+    for train, test in pOut.split(arr):
+        print("%s %s" % (train, test))
