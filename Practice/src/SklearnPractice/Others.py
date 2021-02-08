@@ -104,3 +104,12 @@ def otherPractice():
     # p * len(arr) rows
     for train, test in pOut.split(arr):
         print("%s %s" % (train, test))
+
+    from sklearn.model_selection import ShuffleSplit
+
+    shuffle = ShuffleSplit(n_splits=5, test_size=0.2)
+    # n_splits rows, each row train : test ratio is (total - total * test_size) : total * test_size
+    # 5 rows, each row train : test ratio is 8) : 2
+
+    for train, test in shuffle.split(arr):
+        print("%s %s" % (train, test))
