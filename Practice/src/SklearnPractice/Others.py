@@ -101,7 +101,7 @@ def otherPractice():
 
     pOut = LeavePOut(p=2)
 
-    # p * len(arr) rows
+    # (p len(arr)) rows
     for train, test in pOut.split(arr):
         print("%s %s" % (train, test))
 
@@ -112,4 +112,16 @@ def otherPractice():
     # 5 rows, each row train : test ratio is 8) : 2
 
     for train, test in shuffle.split(arr):
+        print("%s %s" % (train, test))
+
+    from sklearn.model_selection import GroupKFold
+
+    # groups = [0,4,3,0,4,3,0,4,3,4] # has to be same length as "arr", doesn't need to be in order
+    groups = [0, 0, 0, 1, 1, 1, 2, 2, 2, 3]  # has to be same length as "arr", doesn't need to be in order
+
+    gFold = GroupKFold(
+        n_splits=2)  # n_splits can be no greater than number of groups (distinct elements in "groups"), and greater than 1
+    # n_splits rows, each row train : test rate is (I don't know ...)
+
+    for train, test in gFold.split(arr, groups=groups):
         print("%s %s" % (train, test))
