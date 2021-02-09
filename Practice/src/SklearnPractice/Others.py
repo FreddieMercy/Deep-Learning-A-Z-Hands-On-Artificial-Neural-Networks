@@ -125,6 +125,7 @@ def otherPractice():
 
     for train, test in gFold.split(arr, groups=groups):
         print("%s %s" % (train, test))
+        
     from sklearn.decomposition import PCA, KernelPCA
 
     pca = PCA(n_components=2)  # number of componenets to keep,
