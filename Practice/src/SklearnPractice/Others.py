@@ -125,3 +125,10 @@ def otherPractice():
 
     for train, test in gFold.split(arr, groups=groups):
         print("%s %s" % (train, test))
+    from sklearn.decomposition import PCA, KernelPCA
+
+    pca = PCA(n_components=2)  # number of componenets to keep,
+    # because PCA is 降维的东西，去高留低（essential).
+    # if not set then all components will be reserved.
+    # 但这东西到底是干什么用的？？？？？？
+    # 貌似只有画图事能体现它的能力
