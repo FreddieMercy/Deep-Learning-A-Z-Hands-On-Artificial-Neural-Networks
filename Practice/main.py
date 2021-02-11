@@ -1,4 +1,5 @@
 import random
+import numpy as np
 
 
 def splitTrainTest(limit=5, gap=5, seed=0):
@@ -18,7 +19,7 @@ def splitTrainTest(limit=5, gap=5, seed=0):
             if random.randint(0, 100) > 20:
                 matrix[r][c] = itera
             else:
-                matrix[r][c] = None
+                matrix[r][c] = np.nan
 
     return expected, matrix
 
@@ -41,6 +42,16 @@ print(expected)
 print(matrix)
 
 print()
+
+from sklearn.impute import SimpleImputer
+
+simple = SimpleImputer(missing_values=np.nan)
+
+print(evaluateImputation(simple.fit_transform(matrix), expected))
+
+from sklearn.impute import KNNImputer
+
+print(evaluateImputation(KNNImputer(n_neighbors=2).fit_transform(matrix), expected))
 
 from sklearn.impute import KNNImputer
 
