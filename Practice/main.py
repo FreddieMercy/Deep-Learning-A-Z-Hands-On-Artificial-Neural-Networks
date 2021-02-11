@@ -1,27 +1,59 @@
-from src.MatplotlibPractice import matplotlibPractice
-from src.NumpyPractice import numpyPractice
-from src.PandasPractice import pandasPractice
-from src.SklearnPractice.LinearRegression import linearRegressionPractice
-from src.SklearnPractice.Others import otherPractice
-from src.SklearnPractice.SVC import svcPractice
-from src.SklearnPractice.NearestNeighbors import nearestNeighborsPractice
-from src.SklearnPractice.DecisionTree import decisionTreePractice
-from src.SklearnPractice.Ensemble import ensemblePractice
-from Comparison import Comparison
+import random
 
 
-def main():
-    numpyPractice()
-    matplotlibPractice()
-    pandasPractice()
-    linearRegressionPractice()
-    svcPractice()
-    nearestNeighborsPractice()
-    decisionTreePractice()
-    ensemblePractice()
-    otherPractice()
+def splitTrainTest(len=5, gap=5, seed=0):
+    expected = []
+    matrix = []
+
+    itera = 0
+
+    random.seed(seed)
+
+    for r in range(0, len):
+        expected.append([i for i in range(0, len)])
+        matrix.append([i for i in range(0, len)])
+        for c in range(0, len):
+            itera += gap
+            expected[r][c] = itera
+            if random.randint(0, 100) > 20:
+                matrix[r][c] = itera
+            else:
+                matrix[r][c] = None
+
+    return expected, matrix
 
 
-main()
-print("--------------------------------------------------------------------")
-Comparison()
+def evaluateImputation(expected, matrix):
+    score = 0
+    total = 0
+    for r in range(0, len(matrix)):
+        for c in range(0, len(matrix[0])):
+            if matrix[r][c] == expected[r][c]:
+                score += 1
+            total += 1
+
+    return (score / total) * 100
+
+
+expected, matrix = splitTrainTest()
+
+print(expected)
+print(matrix)
+
+from sklearn.impute import KNNImputer
+
+knn1 = KNNImputer(n_neighbors=1)
+knn2 = KNNImputer(n_neighbors=2)
+knn3 = KNNImputer(n_neighbors=3)
+knn4 = KNNImputer(n_neighbors=4)
+knn5 = KNNImputer(n_neighbors=5)
+knn6 = KNNImputer(n_neighbors=6)
+
+print("* KNNImputer:")
+
+print(evaluateImputation(knn1.fit_transform(matrix), expected))
+print(evaluateImputation(knn2.fit_transform(matrix), expected))
+print(evaluateImputation(knn3.fit_transform(matrix), expected))
+print(evaluateImputation(knn4.fit_transform(matrix), expected))
+print(evaluateImputation(knn5.fit_transform(matrix), expected))
+print(evaluateImputation(knn6.fit_transform(matrix), expected))
