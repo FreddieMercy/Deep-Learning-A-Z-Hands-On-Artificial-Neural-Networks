@@ -1,7 +1,7 @@
 import random
 
 
-def splitTrainTest(len=5, gap=5, seed=0):
+def splitTrainTest(limit=5, gap=5, seed=0):
     expected = []
     matrix = []
 
@@ -9,10 +9,10 @@ def splitTrainTest(len=5, gap=5, seed=0):
 
     random.seed(seed)
 
-    for r in range(0, len):
-        expected.append([i for i in range(0, len)])
-        matrix.append([i for i in range(0, len)])
-        for c in range(0, len):
+    for r in range(0, limit):
+        expected.append([i for i in range(0, limit)])
+        matrix.append([i for i in range(0, limit)])
+        for c in range(0, limit):
             itera += gap
             expected[r][c] = itera
             if random.randint(0, 100) > 20:
@@ -40,6 +40,8 @@ expected, matrix = splitTrainTest()
 print(expected)
 print(matrix)
 
+print()
+
 from sklearn.impute import KNNImputer
 
 knn1 = KNNImputer(n_neighbors=1)
@@ -49,7 +51,7 @@ knn4 = KNNImputer(n_neighbors=4)
 knn5 = KNNImputer(n_neighbors=5)
 knn6 = KNNImputer(n_neighbors=6)
 
-print("* KNNImputer:")
+print("* KNNImputer:\n")
 
 print(evaluateImputation(knn1.fit_transform(matrix), expected))
 print(evaluateImputation(knn2.fit_transform(matrix), expected))
