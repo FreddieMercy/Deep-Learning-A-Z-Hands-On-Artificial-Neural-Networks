@@ -1,5 +1,6 @@
 import random
 import numpy as np
+from sklearn.impute import SimpleImputer, KNNImputer
 
 
 def splitTrainTest(limit=5, gap=5, seed=0):
@@ -43,17 +44,12 @@ print(matrix)
 
 print()
 
-from sklearn.impute import SimpleImputer
-
 simple = SimpleImputer(missing_values=np.nan)
 
 print(evaluateImputation(simple.fit_transform(matrix), expected))
-
-from sklearn.impute import KNNImputer
-
 print(evaluateImputation(KNNImputer(n_neighbors=2).fit_transform(matrix), expected))
 
-from sklearn.impute import KNNImputer
+print("=============================================================================================================")
 
 knn1 = KNNImputer(n_neighbors=1)
 knn2 = KNNImputer(n_neighbors=2)
