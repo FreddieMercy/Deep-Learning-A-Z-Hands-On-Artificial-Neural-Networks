@@ -29,3 +29,19 @@ print(transformer.fit_transform(vector.fit_transform(doc)))
 print("-----------------------------------------------------------")
 counter2 = text.CountVectorizer()
 print(counter2.fit_transform(doc))  # see, same as 'transformer', which is TfidfVectorizer + TfidfTransformer
+
+print("-----------------------------------------------------------")
+
+from sklearn.compose import ColumnTransformer
+from sklearn.preprocessing import Normalizer
+
+nums = [[0., 1., 2., 2., 123.],
+        [1., 1., 0., 1., 456.],
+        [0., 0., 1., 2., 789.]]
+
+print(ColumnTransformer(
+    # [("norm1", Normalizer(norm='l1'), [0, 1, 4]),
+    [("norm1", Normalizer(norm='l1'), [0, 1]),  # transform column 0 and 1
+     ("norm2", Normalizer(norm='l1'), slice(2, 4))  # transform column 2 to 3 (because column 4 is not inclusive)
+     # so, column 4 will not be included
+     ]).fit_transform(nums))
