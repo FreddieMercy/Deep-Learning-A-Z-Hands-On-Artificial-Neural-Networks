@@ -1,5 +1,5 @@
 from numpy import ravel
-from sklearn.preprocessing import OneHotEncoder, LabelEncoder
+from sklearn.preprocessing import OneHotEncoder, LabelEncoder, OrdinalEncoder
 
 import pandas as pd
 
@@ -13,3 +13,8 @@ print("------------------------------------------------------------")
 labelEncoder = LabelEncoder()
 print(labelEncoder.fit_transform(ravel(doc)))
 print(list(labelEncoder.classes_))
+
+print("------------------------------------------------------------")
+ordinalEncoder = OrdinalEncoder()
+print(ordinalEncoder.fit_transform(doc))
+print(ordinalEncoder.categories_)
