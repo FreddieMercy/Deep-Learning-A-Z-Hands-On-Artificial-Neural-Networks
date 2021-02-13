@@ -1,32 +1,10 @@
-from src.MatplotlibPractice import matplotlibPractice
-from src.NumpyPractice import numpyPractice
-from src.PandasPractice import pandasPractice
-from src.SklearnPractice.Imputation import imputationPractice
-from src.SklearnPractice.LinearRegression import linearRegressionPractice
-from src.SklearnPractice.Others import otherPractice
-from src.SklearnPractice.SVC import svcPractice
-from src.SklearnPractice.NearestNeighbors import nearestNeighborsPractice
-from src.SklearnPractice.DecisionTree import decisionTreePractice
-from src.SklearnPractice.Ensemble import ensemblePractice
-from src.SklearnPractice.ComposeAndFeatureExtractionPractice import composeAndFeatureExtractionPracticeTreePractice
-from Comparison import Comparison
+from sklearn.preprocessing import OneHotEncoder
 
+import pandas as pd
 
-def main():
-    numpyPractice()
-    matplotlibPractice()
-    pandasPractice()
-    linearRegressionPractice()
-    svcPractice()
-    nearestNeighborsPractice()
-    decisionTreePractice()
-    ensemblePractice()
-    otherPractice()
-    composeAndFeatureExtractionPracticeTreePractice()
+doc = pd.read_csv("data/raw/raw2.txt", delimiter='\t')
 
-
-main()
-print("--------------------------------------------------------------------")
-Comparison()
-
-imputationPractice()
+oneEncoder = OneHotEncoder(drop=None)
+print(doc)
+print(oneEncoder.fit_transform(doc).toarray())  # somehow ignores the first line
+print(oneEncoder.categories_)
