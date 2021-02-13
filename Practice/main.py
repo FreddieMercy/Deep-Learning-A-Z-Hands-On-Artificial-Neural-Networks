@@ -1,4 +1,5 @@
-from sklearn.preprocessing import OneHotEncoder
+from numpy import ravel
+from sklearn.preprocessing import OneHotEncoder, LabelEncoder
 
 import pandas as pd
 
@@ -8,3 +9,7 @@ oneEncoder = OneHotEncoder(drop=None)
 print(doc)
 print(oneEncoder.fit_transform(doc).toarray())  # somehow ignores the first line
 print(oneEncoder.categories_)
+print("------------------------------------------------------------")
+labelEncoder = LabelEncoder()
+print(labelEncoder.fit_transform(ravel(doc)))
+print(list(labelEncoder.classes_))
