@@ -5,6 +5,8 @@ cp -rf /Users/freddie/Google\ Drive/Colab\ Notebooks Tensorflow\ Colab\ Practice
 
 git add **
 
-TimeStamp="Update files "+$(date)
+TimeStamp="Update files at "+$(date)
 
 git commit -m "add Tensorflow Colab Practice ($TimeStamp)"
+
+git push
