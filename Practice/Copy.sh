@@ -1,0 +1,10 @@
+#!/bin/sh
+
+rm -rf Tensorflow\ Colab\ Practice > /dev/null 2>&1
+cp -rf /Users/freddie/Google\ Drive/Colab\ Notebooks 
+
+git add **
+
+TimeStamp="Update files "+$(date)
+
+git commit -m "add Tensorflow Colab Practice ($TimeStamp)"
