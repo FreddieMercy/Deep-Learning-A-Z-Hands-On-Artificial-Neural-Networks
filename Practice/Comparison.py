@@ -11,6 +11,7 @@ from sklearn.linear_model import LogisticRegression, BayesianRidge, LassoLars, L
 from sklearn.multiclass import OneVsOneClassifier, OneVsRestClassifier, OutputCodeClassifier
 from sklearn.multioutput import MultiOutputRegressor, MultiOutputClassifier
 from sklearn.neural_network import MLPClassifier, MLPRegressor
+from sklearn.calibration import CalibratedClassifierCV
 
 
 def Comparison():
@@ -115,24 +116,77 @@ def Comparison():
     oneSVC.fit(data_train, target_train)
 
     print(nca_knn.score(data_test, target_test))
+    print(" -- calibrated: {}".format(
+        CalibratedClassifierCV(base_estimator=nca_knn, cv=5).fit(data_train, target_train).score(
+            data_test,
+            target_test)))
     print(knn.score(data_test, target_test))
+    print(" -- calibrated: {}".format(
+        CalibratedClassifierCV(base_estimator=knn, cv=5).fit(data_train, target_train).score(
+            data_test,
+            target_test)))
     print(nc.score(data_test, target_test))
     print(svc.score(data_test, target_test))
+    print(" -- calibrated: {}".format(
+        CalibratedClassifierCV(base_estimator=svc, cv=5).fit(data_train, target_train).score(
+            data_test,
+            target_test)))
     print(bay.score(data_test, target_test))
+    print(" -- calibrated: {}".format(
+        CalibratedClassifierCV(base_estimator=bay, cv=5).fit(data_train, target_train).score(
+            data_test,
+            target_test)))
     print(dt_clf.score(data_test, target_test))
+    print(" -- calibrated: {}".format(
+        CalibratedClassifierCV(base_estimator=dt_clf, cv=5).fit(data_train, target_train).score(
+            data_test,
+            target_test)))
     print(dt_reg.score(data_test, target_test))
     print(bagging.score(data_test, target_test))
+    print(" -- calibrated: {}".format(
+        CalibratedClassifierCV(base_estimator=bagging, cv=5).fit(data_train, target_train).score(
+            data_test,
+            target_test)))
     print(rndForest.score(data_test, target_test))
+    print(
+        " -- calibrated: {}".format(
+            CalibratedClassifierCV(base_estimator=rndForest, cv=5).fit(data_train, target_train).score(
+                data_test,
+                target_test)))
     print(exTree.score(data_test, target_test))
+    print(" -- calibrated: {}".format(
+        CalibratedClassifierCV(base_estimator=exTree, cv=5).fit(data_train, target_train).score(
+            data_test,
+            target_test)))
     print(ada_clf.score(data_test, target_test))
+    print(" -- calibrated: {}".format(
+        CalibratedClassifierCV(base_estimator=ada_clf, cv=5).fit(data_train, target_train).score(
+            data_test,
+            target_test)))
     print(gbc.score(data_test, target_test))
+    print(" -- calibrated: {}".format(
+        CalibratedClassifierCV(base_estimator=gbc, cv=5).fit(data_train, target_train).score(
+            data_test,
+            target_test)))
     print(gbr.score(data_test, target_test))
     print(vc.score(data_test, target_test))
     print(vr.score(data_test, target_test))
     print(sc.score(data_test, target_test))
+    print(
+        " -- calibrated: {}".format(CalibratedClassifierCV(base_estimator=sc, cv=5).fit(data_train, target_train).score(
+            data_test,
+            target_test)))
     print(sr.score(data_test, target_test))
     print(mulSVC.score(data_test, target_test))
+    print(" -- calibrated: {}".format(
+        CalibratedClassifierCV(base_estimator=mulSVC, cv=5).fit(data_train, target_train).score(
+            data_test,
+            target_test)))
     print(oneSVC.score(data_test, target_test))
+    print(" -- calibrated: {}".format(
+        CalibratedClassifierCV(base_estimator=oneSVC, cv=5).fit(data_train, target_train).score(
+            data_test,
+            target_test)))
 
     # Not a lot of improvement with greater 'hidden_layer_sizes' ...
     mlpc100 = MLPClassifier(solver='lbfgs', alpha=0.05, max_iter=9000, random_state=1, hidden_layer_sizes=(100,))
