@@ -3,7 +3,7 @@ from sklearn.ensemble import AdaBoostClassifier, BaggingClassifier, RandomForest
     GradientBoostingClassifier, GradientBoostingRegressor, VotingClassifier, VotingRegressor, \
     StackingClassifier, StackingRegressor
 from sklearn.model_selection import train_test_split
-from sklearn.naive_bayes import GaussianNB
+from sklearn.naive_bayes import GaussianNB, MultinomialNB
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.pipeline import Pipeline
 from sklearn import neighbors, svm
@@ -39,6 +39,10 @@ def Comparison():
     bay = GaussianNB()
 
     bay.fit(data_train, target_train)
+
+    mb = MultinomialNB()
+
+    mb.fit(data_train, target_train)
 
     from sklearn import tree
 
@@ -136,6 +140,13 @@ def Comparison():
         CalibratedClassifierCV(base_estimator=bay, cv=5).fit(data_train, target_train).score(
             data_test,
             target_test)))
+
+    print(mb.score(data_test, target_test))
+    print(" -- calibrated: {}".format(
+        CalibratedClassifierCV(base_estimator=mb, cv=5).fit(data_train, target_train).score(
+            data_test,
+            target_test)))
+
     print(dt_clf.score(data_test, target_test))
     print(" -- calibrated: {}".format(
         CalibratedClassifierCV(base_estimator=dt_clf, cv=5).fit(data_train, target_train).score(
