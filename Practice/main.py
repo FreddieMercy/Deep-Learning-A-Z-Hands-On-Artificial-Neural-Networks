@@ -8,6 +8,7 @@ from src.SklearnPractice.SVC import svcPractice
 from src.SklearnPractice.NearestNeighbors import nearestNeighborsPractice
 from src.SklearnPractice.DecisionTree import decisionTreePractice
 from src.SklearnPractice.Ensemble import ensemblePractice
+from src.SklearnPractice.ComposeAndFeatureExtractionPractice import composeAndFeatureExtractionPracticeTreePractice
 from Comparison import Comparison
 
 
@@ -21,6 +22,7 @@ def main():
     decisionTreePractice()
     ensemblePractice()
     otherPractice()
+    composeAndFeatureExtractionPracticeTreePractice()
 
 
 main()
