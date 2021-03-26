@@ -9,6 +9,7 @@ from src.SklearnPractice.NearestNeighbors import nearestNeighborsPractice
 from src.SklearnPractice.DecisionTree import decisionTreePractice
 from src.SklearnPractice.Ensemble import ensemblePractice
 from src.SklearnPractice.ComposeAndFeatureExtractionPractice import composeAndFeatureExtractionPracticeTreePractice
+from src.SklearnPractice.Encoder import encoderPractice
 from Comparison import Comparison
 
 
@@ -23,7 +24,7 @@ def main():
     ensemblePractice()
     otherPractice()
     composeAndFeatureExtractionPracticeTreePractice()
-
+    encoderPractice()
 
 main()
 print("--------------------------------------------------------------------")

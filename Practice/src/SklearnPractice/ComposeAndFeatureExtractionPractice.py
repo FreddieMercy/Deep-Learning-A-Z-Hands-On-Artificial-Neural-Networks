@@ -9,7 +9,7 @@ def composeAndFeatureExtractionPracticeTreePractice():
         'Is this the first document?',
     ]
 
-    doc = pd.read_csv("data/raw.txt", delimiter='\t')
+    doc = pd.read_csv("data/raw/raw1.txt", delimiter='\t')
 
     counter = text.CountVectorizer()
     counter.fit(corpus)
