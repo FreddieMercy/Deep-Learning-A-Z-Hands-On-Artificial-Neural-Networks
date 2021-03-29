@@ -8,7 +8,6 @@ def encoderPractice():
 
     doc = pd.read_csv("data/raw/raw2.txt", delimiter='\t')
 
-
     oneEncoder = OneHotEncoder(drop=None)  # 按图索骥
 
     print(doc)
@@ -35,4 +34,5 @@ def encoderPractice():
 
     multiLabelBinarizer = MultiLabelBinarizer()  # I really don't know...
     print(multiLabelBinarizer.fit_transform(doc))
+
     print(list(multiLabelBinarizer.classes_))
