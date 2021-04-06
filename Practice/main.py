@@ -26,7 +26,6 @@ def main():
     composeAndFeatureExtractionPracticeTreePractice()
     encoderPractice()
 
-
 main()
 print("--------------------------------------------------------------------")
 Comparison()
